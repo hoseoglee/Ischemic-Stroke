@@ -1,0 +1,12 @@
+# Mac system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+**/.DS_Store
+**/.AppleDouble
+**/.LSOverride
+**/._*
+
+# User requested
+docs/
