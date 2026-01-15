@@ -4,12 +4,15 @@ from weasyprint import HTML
 import sys
 import re
 import base64
-
 import zlib
+
+def convert_md_to_html_pdf(input_md, output_html, output_pdf):
+    # Read Markdown
+    with open(input_md, 'r', encoding='utf-8') as f:
+        text = f.read()
 
     # Pre-process: Convert Mermaid to Images (Removed: Now using local assets)
     # text = mermaid_to_img(text)
-
 
     # Convert to HTML
     # Using 'extra' extension for tables, fences, etc.
