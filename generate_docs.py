@@ -7,39 +7,9 @@ import base64
 
 import zlib
 
-def mermaid_to_img(text):
-    """
-    Finds mermaid code blocks and replaces them with standard markdown images pointing to kroki.io
-    """
-    pattern = r'```mermaid\s*\n(.*?)```'
-    
-    def replacement(match):
-        code = match.group(1).strip()
-        print(f"DEBUG: Found mermaid block of length {len(code)}")
-        
-        # Kroki expects: Deflate + Base64 (URL Safe)
-        # 1. Encode to UTF-8
-        utf8_bytes = code.encode('utf-8')
-        # 2. Compress using zlib (deflate)
-        compressed_bytes = zlib.compress(utf8_bytes, level=9)
-        # 3. Base64 Encode (URL Safe)
-        base64_bytes = base64.urlsafe_b64encode(compressed_bytes)
-        base64_string = base64_bytes.decode('ascii')
-        
-        url = f"https://kroki.io/mermaid/svg/{base64_string}"
-        return f"![Mermaid Diagram]({url})"
+    # Pre-process: Convert Mermaid to Images (Removed: Now using local assets)
+    # text = mermaid_to_img(text)
 
-    new_text, count = re.subn(pattern, replacement, text, flags=re.DOTALL)
-    print(f"DEBUG: Replaced {count} mermaid blocks")
-    return new_text
-
-def convert_md_to_html_pdf(input_md, output_html, output_pdf):
-    # Read Markdown
-    with open(input_md, 'r', encoding='utf-8') as f:
-        text = f.read()
-
-    # Pre-process: Convert Mermaid to Images
-    text = mermaid_to_img(text)
 
     # Convert to HTML
     # Using 'extra' extension for tables, fences, etc.
