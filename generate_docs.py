@@ -4,7 +4,9 @@ from weasyprint import HTML
 import sys
 import re
 import base64
+import base64
 import zlib
+import os
 
 def convert_md_to_html_pdf(input_md, output_html, output_pdf):
     # Read Markdown
@@ -13,6 +15,27 @@ def convert_md_to_html_pdf(input_md, output_html, output_pdf):
 
     # Pre-process: Convert Mermaid to Images (Removed: Now using local assets)
     # text = mermaid_to_img(text)
+
+    # Pre-process: Embed local images as Base64 to ensure correct PDF rendering
+    def replace_images_with_base64(match):
+        alt_text = match.group(1)
+        image_path = match.group(2)
+        
+        # Only process local files in assets/
+        if image_path.startswith('assets/'):
+            try:
+                with open(image_path, 'rb') as img_file:
+                    encoded_string = base64.b64encode(img_file.read()).decode('utf-8')
+                    # Determine mime type (default to svg+xml for this task)
+                    mime_type = "image/svg+xml" if image_path.endswith('.svg') else "image/png"
+                    return f"![{alt_text}](data:{mime_type};base64,{encoded_string})"
+            except Exception as e:
+                print(f"Warning: Could not embed image {image_path}: {e}")
+                return match.group(0) # Return original if failed
+        return match.group(0)
+
+    # Regex to find markdown images: ![alt](path)
+    text = re.sub(r'!\[(.*?)\]\((.*?)\)', replace_images_with_base64, text)
 
     # Convert to HTML
     # Using 'extra' extension for tables, fences, etc.
