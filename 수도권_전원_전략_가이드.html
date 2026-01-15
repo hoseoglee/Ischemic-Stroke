@@ -4,16 +4,18 @@
     <head>
         <meta charset="utf-8">
         <style>
-            body { font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; line-height: 1.6; padding: 20px; }
-            h1, h2, h3 { color: #2c3e50; }
-            h1 { border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
-            h2 { border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px; }
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+            body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+            h1, h2, h3 { color: #2c3e50; font-weight: 700; }
+            h1 { border-bottom: 2px solid #2c3e50; padding-bottom: 10px; font-size: 2em; }
+            h2 { border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px; font-size: 1.5em; }
             table { border-collapse: collapse; width: 100%; margin: 20px 0; }
             th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-            th { background-color: #f2f2f2; }
-            blockquote { border-left: 4px solid #3498db; margin: 0; padding-left: 20px; color: #555; background-color: #f9f9f9; padding: 10px 20px; }
+            th { background-color: #f2f2f2; font-weight: 700; }
+            blockquote { border-left: 4px solid #3498db; margin: 20px 0; padding-left: 20px; color: #555; background-color: #f0f7fb; padding: 15px; }
             code { background-color: #f8f8f8; padding: 2px 5px; border-radius: 3px; font-family: monospace; }
             pre { background-color: #f8f8f8; padding: 15px; border-radius: 5px; overflow-x: auto; }
+            img { max-width: 100%; height: auto; display: block; margin: 20px auto; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         </style>
     </head>
     <body>
@@ -34,16 +36,7 @@
 </blockquote>
 <hr />
 <h2 id="1-hospital-to-hospital"><strong>제1안. 상급종합병원 간 전원 의뢰 (Hospital-to-Hospital)</strong></h2>
-<pre><code class="language-mermaid">graph LR
-    A[환자/보호자] --&gt;|전원 요청| B[동강병원 주치의&lt;br/&gt;(진료협력센터)]
-    B --&gt;|진료 의뢰&lt;br/&gt;(Medical Referral)| C[삼성서울병원&lt;br/&gt;파트너즈센터]
-    C --&gt; D{수용 여부 결정}
-    D --&gt;|수용 승인| E[전원 확정 및&lt;br/&gt;구급차 이동]
-    D --&gt;|수용 불가| F[제2안 실행&lt;br/&gt;(재활병원 선행)]
-    style B fill:#f9f,stroke:#333,stroke-width:2px
-    style C fill:#bbf,stroke:#333,stroke-width:2px
-    style E fill:#bfb,stroke:#333,stroke-width:2px
-</code></pre>
+<p><img alt="Mermaid Diagram" src="https://mermaid.ink/img/Z3JhcGggTFIKICAgIEFb7ZmY7J6QL-uztO2YuOyekF0gLS0-fOyghOybkCDsmpTssq18IEJb64-Z6rCV67OR7JuQIOyjvOy5mOydmDxici8-KOynhOujjO2YkeugpeyEvO2EsCldCiAgICBCIC0tPnzsp4Tro4wg7J2Y66KwPGJyLz4oTWVkaWNhbCBSZWZlcnJhbCl8IENb7IK87ISx7ISc7Jq467OR7JuQPGJyLz7tjIztirjrhIjspojshLzthLBdCiAgICBDIC0tPiBEe-yImOyaqSDsl6zrtoAg6rKw7KCVfQogICAgRCAtLT587IiY7JqpIOyKueyduHwgRVvsoITsm5Ag7ZmV7KCVIOuwjzxici8-6rWs6riJ7LCoIOydtOuPmV0KICAgIEQgLS0-fOyImOyaqSDrtojqsIB8IEZb7KCcMuyViCDsi6Ttlok8YnIvPijsnqztmZzrs5Hsm5Ag7ISg7ZaJKV0KICAgIHN0eWxlIEIgZmlsbDojZjlmLHN0cm9rZTojMzMzLHN0cm9rZS13aWR0aDoycHgKICAgIHN0eWxlIEMgZmlsbDojYmJmLHN0cm9rZTojMzMzLHN0cm9rZS13aWR0aDoycHgKICAgIHN0eWxlIEUgZmlsbDojYmZiLHN0cm9rZTojMzMzLHN0cm9rZS13aWR0aDoycHgK" /></p>
 <p><strong>"동강병원 의료진을 통해 삼성서울병원으로 정식 전원을 요청하는 안전한 방식"</strong></p>
 <ul>
 <li><strong>방식의 핵심</strong>: 환자가 서류를 들고 무작정 상경하는 것이 아니라, <strong>현재 병원(동강)에서 서울 병원(삼성)으로 의학적 소견을 먼저 보내고 입원 승인을 받은 뒤 이동</strong>하는 방식입니다.</li>
@@ -88,28 +81,7 @@
 </blockquote>
 <hr />
 <h2 id="2-sequential-transfer"><strong>제2안. 권역별 단계적 치료 (Sequential Transfer)</strong></h2>
-<pre><code class="language-mermaid">graph TD
-    Start[동강병원&lt;br/&gt;진료 의뢰] --&gt;|삼성서울병원&lt;br/&gt;외래 예약 확정| Phase1
-
-    subgraph Phase1 [1단계: 서울권역]
-        P1_Rehab[청담병원&lt;br/&gt;(입원/재활)] &lt;--&gt; P1_Univ[삼성서울병원&lt;br/&gt;(협진 외래)]
-    end
-
-    subgraph Phase2 [2단계: 수원권역]
-        P2_Rehab[베데스다병원&lt;br/&gt;(입원/재활)] &lt;--&gt; P2_Univ[아주대병원&lt;br/&gt;(협진 외래)]
-    end
-
-    subgraph Phase3 [3단계: 울산권역]
-        P3_Home[자택/강남동강&lt;br/&gt;(지역사회 안착)] &lt;--&gt; P3_Local[동강병원&lt;br/&gt;(주치의 복귀)]
-    end
-
-    Phase1 --&gt;|이송: 사설구급차| Phase2
-    Phase2 --&gt;|이송: 사설구급차| Phase3
-
-    style Start fill:#f9f,stroke:#333,stroke-width:2px
-    classDef hospital fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
-    class P1_Rehab,P1_Univ,P2_Rehab,P2_Univ,P3_Home,P3_Local hospital;
-</code></pre>
+<p><img alt="Mermaid Diagram" src="https://mermaid.ink/img/Z3JhcGggVEQKICAgIFN0YXJ0W-uPmeqwleuzkeybkDxici8-7KeE66OMIOydmOuisF0gLS0-fOyCvOyEseyEnOyauOuzkeybkDxici8-7Jm4656YIOyYiOyVvSDtmZXsoJV8IFBoYXNlMQoKICAgIHN1YmdyYXBoIFBoYXNlMSBbMeuLqOqzhDog7ISc7Jq46raM7JetXQogICAgICAgIFAxX1JlaGFiW-yyreuLtOuzkeybkDxici8-KOyeheybkC_snqztmZwpXSA8LS0-IFAxX1VuaXZb7IK87ISx7ISc7Jq467OR7JuQPGJyLz4o7ZiR7KeEIOyZuOuemCldCiAgICBlbmQKICAgIAogICAgc3ViZ3JhcGggUGhhc2UyIFsy64uo6rOEOiDsiJjsm5Dqtozsl61dCiAgICAgICAgUDJfUmVoYWJb67Kg642w7Iqk64uk67OR7JuQPGJyLz4o7J6F7JuQL-yerO2ZnCldIDwtLT4gUDJfVW5pdlvslYTso7zrjIDrs5Hsm5A8YnIvPijtmJHsp4Qg7Jm4656YKV0KICAgIGVuZAogICAgCiAgICBzdWJncmFwaCBQaGFzZTMgWzPri6jqs4Q6IOyauOyCsOq2jOyXrV0KICAgICAgICBQM19Ib21lW-yekO2DnS_qsJXrgqjrj5nqsJU8YnIvPijsp4Dsl63sgqztmowg7JWI7LCpKV0gPC0tPiBQM19Mb2NhbFvrj5nqsJXrs5Hsm5A8YnIvPijso7zsuZjsnZgg67O16reAKV0KICAgIGVuZAoKICAgIFBoYXNlMSAtLT587J207IahOiDsgqzshKTqtazquInssKh8IFBoYXNlMgogICAgUGhhc2UyIC0tPnzsnbTshqE6IOyCrOyEpOq1rOq4ieywqHwgUGhhc2UzCgogICAgc3R5bGUgU3RhcnQgZmlsbDojZjlmLHN0cm9rZTojMzMzLHN0cm9rZS13aWR0aDoycHgKICAgIGNsYXNzRGVmIGhvc3BpdGFsIGZpbGw6I2UxZjVmZSxzdHJva2U6IzAxNTc5YixzdHJva2Utd2lkdGg6MnB4OwogICAgY2xhc3MgUDFfUmVoYWIsUDFfVW5pdixQMl9SZWhhYixQMl9Vbml2LFAzX0hvbWUsUDNfTG9jYWwgaG9zcGl0YWw7Cg==" /></p>
 <p><strong>"동강병원에서 잡아준 외래 일정에 맞춰, 서울/수원 재활병원으로 이동하는 로드맵"</strong></p>
 <ul>
 <li><strong>특징</strong>: 환자가 개별적으로 예약하는 것보다, <strong>동강병원 진료협력센터를 통해 삼성서울병원 외래(Fast Track)를 먼저 잡고</strong>, 그 일정에 맞춰 재활병원 입원을 조율하는 방식입니다.</li>
