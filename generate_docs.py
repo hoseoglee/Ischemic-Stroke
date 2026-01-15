@@ -9,10 +9,12 @@ def mermaid_to_img(text):
     """
     Finds mermaid code blocks and replaces them with standard markdown images pointing to mermaid.ink
     """
-    pattern = r'```mermaid\n(.*?)```'
+    # Regex to capture mermaid blocks, handling optional whitespace after ```mermaid
+    pattern = r'```mermaid\s*\n(.*?)```'
     
     def replacement(match):
         code = match.group(1)
+        print(f"DEBUG: Found mermaid block of length {len(code)}")
         # Merlin.ink expects base64 encoded string
         code_bytes = code.encode('utf-8')
         base64_bytes = base64.urlsafe_b64encode(code_bytes)
@@ -20,7 +22,9 @@ def mermaid_to_img(text):
         url = f"https://mermaid.ink/img/{base64_string}"
         return f"![Mermaid Diagram]({url})"
 
-    return re.sub(pattern, replacement, text, flags=re.DOTALL)
+    new_text, count = re.subn(pattern, replacement, text, flags=re.DOTALL)
+    print(f"DEBUG: Replaced {count} mermaid blocks")
+    return new_text
 
 def convert_md_to_html_pdf(input_md, output_html, output_pdf):
     # Read Markdown
