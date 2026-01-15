@@ -14,7 +14,7 @@ def mermaid_to_img(text):
     pattern = r'```mermaid\s*\n(.*?)```'
     
     def replacement(match):
-        code = match.group(1)
+        code = match.group(1).strip()
         print(f"DEBUG: Found mermaid block of length {len(code)}")
         
         # Kroki expects: Deflate + Base64 (URL Safe)
